@@ -156,7 +156,7 @@ def evaluate(csv_path="results/[HateSpeech] gpt-4o-mini-2024-08-13.csv"):
 
 
 def generate_summary(data, client, max_tokens, temperature) -> dict:
-    result = dict(filtered=False, summary={}, prompt_filter_result={}, completion_filter_result={})
+    result = dict(filtered=False, prompt_filter_result={}, completion_filter_result={})
     
         
     completion = (

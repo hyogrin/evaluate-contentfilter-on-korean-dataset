@@ -18,9 +18,9 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 
 ### GPT4o-mini
 
-|||low threshold||default2||high threshold||
+|     |     |     low threshold<br>(custom filter)||    default2||  high threshold<br>(custom filter)||
 | --- | --- | --- | --- | --- | --- | --- | --- |
-|category_big|category|filtered_count|filtered_mean|filtered_count|filtered_mean|filtered_count|filtered_mean|
+|category_big|category|count|mean|count|mean|count|mean|
 |Hate Speech|['Age', 'Gender', 'Religion']|2|0.667|0|0.000|0|0.000|
 |Hate Speech|['Age', 'Gender']|3|0.375|0|0.000|0|0.000|
 |Hate Speech|['Age', 'Profanity']|3|0.600|0|0.000|0|0.000|
