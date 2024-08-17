@@ -106,11 +106,11 @@ def benchmark(args):
                         break
                 except openai.BadRequestError as e:
                     logger.error(f"BadRequestError, {e.body['innererror']['code']}, {e.body['message']}. ")
-                    responses.append({"id":data['id'],"category": data["category"], "filtered": True, "content": data["text"], "summary":result['summary'],"prompt_filter_result":None, "completion_filter_result":e.body['innererror']['content_filter_result']})
+                    responses.append({"id":data['id'],"category": data["category"], "filtered": True, "content": data["text"], "summary":None,"prompt_filter_result":None, "completion_filter_result":e.body['innererror']['content_filter_result']})
                     break
                 except openai.ContentFilterFinishReasonError as e:
                     logger.error(f"BadRequestError, {e.body['innererror']['code']}, {e.body['message']}. ")
-                    responses.append({"id":data['id'],"category": data["category"], "filtered": True, "content": data["text"], "summary":result['summary'],"prompt_filter_result":None, "completion_filter_result":e.body['innererror']['content_filter_result']})
+                    responses.append({"id":data['id'],"category": data["category"], "filtered": True, "content": data["text"], "summary":None,"prompt_filter_result":None, "completion_filter_result":e.body['innererror']['content_filter_result']})
                     break
                 except Exception as e:
                     logger.error(f"Error in process_inputs: {e}")
@@ -131,7 +131,7 @@ def benchmark(args):
 
     logger.info(f"====== [START] Content Filter Evaluation start - CSV_PATH: {csv_path} =====")
     evaluate(csv_path)
-    logger.info(f"====== [START] Content Filter Evaluation end =====")
+    logger.info(f"====== [DONE] Content Filter Evaluation end =====")
 
 def evaluate(csv_path="results/[HateSpeech] gpt-4o-mini-2024-08-13.csv"):
     result = pd.read_csv(csv_path)
@@ -156,7 +156,7 @@ def evaluate(csv_path="results/[HateSpeech] gpt-4o-mini-2024-08-13.csv"):
 
 
 def generate_summary(data, client, max_tokens, temperature) -> dict:
-    result = dict(filtered=False, prompt_filter_result={}, completion_filter_result={})
+    result = dict(filtered=False, summary={}, prompt_filter_result={}, completion_filter_result={})
     
         
     completion = (
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     parser.add_argument("--num_samples", type=int, default=2000)
     parser.add_argument("--is_random", type=bool, default=False)
     parser.add_argument("--is_debug", type=bool, default=False)
-    parser.add_argument("--num_debug_samples", type=int, default=100)
+    parser.add_argument("--num_debug_samples", type=int, default=15)
     parser.add_argument("--model_provider", type=str, default="azureopenai")
     parser.add_argument("--max_retries", type=int, default=3)
     parser.add_argument("--max_tokens", type=int, default=256)
