@@ -1,0 +1,10 @@
+datasets==2.20.0
+huggingface-hub==0.24.5
+numpy
+openai==1.40.1
+pandas==2.2.2
+python-dotenv==1.0.1
+regex==2024.7.24
+requests==2.32.3
+safetensors==0.4.4
+tqdm==4.66.5

@@ -1,0 +1,44 @@
+category_big,category,filtered_count,filtered_mean
+Hate Speech,"['Age', 'Gender', 'Religion']",2,0.6666666666666666
+Hate Speech,"['Age', 'Gender']",3,0.375
+Hate Speech,"['Age', 'Profanity']",3,0.6
+Hate Speech,"['Age', 'Race']",2,1.0
+Hate Speech,"['Age', 'Religion']",10,0.625
+Hate Speech,['Age'],83,0.4689265536723164
+Hate Speech,"['Gender', 'Religion']",6,0.6666666666666666
+Hate Speech,['Gender'],30,0.37037037037037035
+Hate Speech,"['Origin', 'Age', 'Religion']",1,1.0
+Hate Speech,"['Origin', 'Age']",17,0.7727272727272727
+Hate Speech,"['Origin', 'Gender']",0,0.0
+Hate Speech,"['Origin', 'Physical', 'Age']",2,1.0
+Hate Speech,"['Origin', 'Physical']",3,0.6
+Hate Speech,"['Origin', 'Religion']",8,0.4444444444444444
+Hate Speech,['Origin'],51,0.5730337078651685
+Hate Speech,"['Physical', 'Age', 'Gender']",1,0.3333333333333333
+Hate Speech,"['Physical', 'Age']",19,0.7037037037037037
+Hate Speech,"['Physical', 'Gender', 'Profanity']",0,0.0
+Hate Speech,"['Physical', 'Gender', 'Religion']",0,0.0
+Hate Speech,"['Physical', 'Gender']",14,0.5833333333333334
+Hate Speech,"['Physical', 'Profanity']",3,0.75
+Hate Speech,"['Physical', 'Religion']",3,0.75
+Hate Speech,['Physical'],77,0.6260162601626016
+Hate Speech,"['Politics', 'Age', 'Gender']",1,0.5
+Hate Speech,"['Politics', 'Age', 'Religion']",3,1.0
+Hate Speech,"['Politics', 'Age']",21,0.84
+Hate Speech,"['Politics', 'Gender', 'Religion']",1,1.0
+Hate Speech,"['Politics', 'Gender']",1,0.5
+Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age']",1,1.0
+Hate Speech,"['Politics', 'Origin', 'Religion']",1,0.5
+Hate Speech,"['Politics', 'Origin']",1,1.0
+Hate Speech,"['Politics', 'Physical', 'Age']",4,1.0
+Hate Speech,"['Politics', 'Physical', 'Religion']",1,1.0
+Hate Speech,"['Politics', 'Physical']",17,0.7727272727272727
+Hate Speech,"['Politics', 'Profanity']",2,1.0
+Hate Speech,"['Politics', 'Religion']",16,0.8
+Hate Speech,['Politics'],85,0.6692913385826772
+Hate Speech,['Profanity'],24,0.6486486486486487
+Hate Speech,['Race'],3,0.75
+Hate Speech,"['Religion', 'Race']",1,1.0
+Hate Speech,['Religion'],40,0.7142857142857143
+Not Hate Speech,['Not Hate Speech'],257,0.24199623352165725
