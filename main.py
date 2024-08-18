@@ -37,6 +37,7 @@ def get_prompt(x) -> str:
 
 def benchmark(args):
 
+    global NUM_SAMPLES, IS_RANDOM, IS_DEBUG, MAX_RETRIES, DELAY_INCREMENT, NUM_DEBUG_SAMPLES, MAX_TOKENS, TEMPERATURE
     NUM_SAMPLES = args.num_samples
     IS_RANDOM = args.is_random
     IS_DEBUG = args.is_debug
@@ -54,7 +55,8 @@ def benchmark(args):
     API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION")
     MODEL_VERSION = os.getenv("OPENAI_MODEL_VERSION")
 
-    client = AzureOpenAI(
+    global CLIENT
+    CLIENT = AzureOpenAI(
         azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT"),
         api_key        = os.getenv("AZURE_OPENAI_API_KEY"),
         api_version    = API_VERSION,
@@ -91,7 +93,7 @@ def benchmark(args):
             
             while retries <= 3:
                 try:
-                    result = generate_summary(data, client, MAX_TOKENS, TEMPERATURE)
+                    result = generate_summary(data)
                     # add the response to the list
                     responses.append({"id":data['id'],"category": data["category"], "filtered": result['filtered'], "content": data["text"], "summary":result['summary'],"prompt_filter_result":result['prompt_filter_result'], "completion_filter_result":result['completion_filter_result']})
                     break
@@ -155,12 +157,11 @@ def evaluate(csv_path="results/[HateSpeech] gpt-4o-mini-2024-08-13.csv"):
     category_big_count.to_csv(f"evals/[HateSpeech] eval-avg-{filename}.csv", index=False)
 
 
-def generate_summary(data, client, max_tokens, temperature) -> dict:
+def generate_summary(data) -> dict:
     result = dict(filtered=False, prompt_filter_result={}, completion_filter_result={})
     
-        
     completion = (
-        client.chat.completions.create(
+        CLIENT.chat.completions.create(
             model=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
             messages=[{
                 "role": "system",
@@ -170,8 +171,8 @@ def generate_summary(data, client, max_tokens, temperature) -> dict:
                 "role": "user",
                 "content": get_prompt(data)
             }],
-            temperature=temperature,
-            max_tokens=max_tokens, 
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS, 
             presence_penalty=-2 
         )
     )
@@ -219,3 +220,5 @@ if __name__ == "__main__":
 
     logger.info(args)
     benchmark(args)
+
+

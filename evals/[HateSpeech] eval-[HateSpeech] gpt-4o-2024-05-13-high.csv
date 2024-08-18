@@ -3,28 +3,28 @@ Hate Speech,"['Age', 'Gender', 'Religion']",0,0.0
 Hate Speech,"['Age', 'Gender']",0,0.0
 Hate Speech,"['Age', 'Profanity']",0,0.0
 Hate Speech,"['Age', 'Race']",0,0.0
-Hate Speech,"['Age', 'Religion']",0,0.0
-Hate Speech,['Age'],3,0.01694915254237288
+Hate Speech,"['Age', 'Religion']",1,0.0625
+Hate Speech,['Age'],0,0.0
 Hate Speech,"['Gender', 'Religion']",0,0.0
-Hate Speech,['Gender'],0,0.0
+Hate Speech,['Gender'],1,0.012345679012345678
 Hate Speech,"['Origin', 'Age', 'Religion']",0,0.0
 Hate Speech,"['Origin', 'Age']",0,0.0
 Hate Speech,"['Origin', 'Gender']",0,0.0
 Hate Speech,"['Origin', 'Physical', 'Age']",0,0.0
 Hate Speech,"['Origin', 'Physical']",1,0.2
-Hate Speech,"['Origin', 'Religion']",1,0.05555555555555555
+Hate Speech,"['Origin', 'Religion']",0,0.0
 Hate Speech,['Origin'],0,0.0
 Hate Speech,"['Physical', 'Age', 'Gender']",0,0.0
-Hate Speech,"['Physical', 'Age']",0,0.0
+Hate Speech,"['Physical', 'Age']",1,0.037037037037037035
 Hate Speech,"['Physical', 'Gender', 'Profanity']",0,0.0
 Hate Speech,"['Physical', 'Gender', 'Religion']",0,0.0
-Hate Speech,"['Physical', 'Gender']",1,0.041666666666666664
+Hate Speech,"['Physical', 'Gender']",0,0.0
 Hate Speech,"['Physical', 'Profanity']",0,0.0
 Hate Speech,"['Physical', 'Religion']",0,0.0
-Hate Speech,['Physical'],1,0.008130081300813009
+Hate Speech,['Physical'],0,0.0
 Hate Speech,"['Politics', 'Age', 'Gender']",0,0.0
 Hate Speech,"['Politics', 'Age', 'Religion']",0,0.0
-Hate Speech,"['Politics', 'Age']",0,0.0
+Hate Speech,"['Politics', 'Age']",1,0.04
 Hate Speech,"['Politics', 'Gender', 'Religion']",0,0.0
 Hate Speech,"['Politics', 'Gender']",0,0.0
 Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",0,0.0
@@ -38,7 +38,7 @@ Hate Speech,"['Politics', 'Profanity']",0,0.0
 Hate Speech,"['Politics', 'Religion']",0,0.0
 Hate Speech,['Politics'],2,0.015748031496062992
 Hate Speech,['Profanity'],0,0.0
-Hate Speech,['Race'],1,0.25
+Hate Speech,['Race'],0,0.0
 Hate Speech,"['Religion', 'Race']",0,0.0
-Hate Speech,['Religion'],1,0.017857142857142856
-Not Hate Speech,['Not Hate Speech'],4,0.003766478342749529
+Hate Speech,['Religion'],0,0.0
+Not Hate Speech,['Not Hate Speech'],1,0.0009416195856873823

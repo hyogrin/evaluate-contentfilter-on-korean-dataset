@@ -4,9 +4,9 @@ Hate Speech,"['Age', 'Gender']",0,0.0
 Hate Speech,"['Age', 'Profanity']",0,0.0
 Hate Speech,"['Age', 'Race']",2,1.0
 Hate Speech,"['Age', 'Religion']",2,0.125
-Hate Speech,['Age'],7,0.03954802259887006
+Hate Speech,['Age'],10,0.05649717514124294
 Hate Speech,"['Gender', 'Religion']",0,0.0
-Hate Speech,['Gender'],2,0.024691358024691357
+Hate Speech,['Gender'],1,0.012345679012345678
 Hate Speech,"['Origin', 'Age', 'Religion']",0,0.0
 Hate Speech,"['Origin', 'Age']",3,0.13636363636363635
 Hate Speech,"['Origin', 'Gender']",0,0.0
@@ -27,7 +27,7 @@ Hate Speech,"['Politics', 'Age', 'Religion']",0,0.0
 Hate Speech,"['Politics', 'Age']",4,0.16
 Hate Speech,"['Politics', 'Gender', 'Religion']",0,0.0
 Hate Speech,"['Politics', 'Gender']",0,0.0
-Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",0,0.0
+Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",1,1.0
 Hate Speech,"['Politics', 'Origin', 'Age']",0,0.0
 Hate Speech,"['Politics', 'Origin', 'Religion']",0,0.0
 Hate Speech,"['Politics', 'Origin']",0,0.0
@@ -40,5 +40,5 @@ Hate Speech,['Politics'],12,0.09448818897637795
 Hate Speech,['Profanity'],2,0.05405405405405406
 Hate Speech,['Race'],2,0.5
 Hate Speech,"['Religion', 'Race']",0,0.0
-Hate Speech,['Religion'],2,0.03571428571428571
-Not Hate Speech,['Not Hate Speech'],23,0.021657250470809793
+Hate Speech,['Religion'],3,0.05357142857142857
+Not Hate Speech,['Not Hate Speech'],27,0.025423728813559324
