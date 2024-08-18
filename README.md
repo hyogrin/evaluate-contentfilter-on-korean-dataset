@@ -14,7 +14,7 @@ The Korean Multi-label Hate Speech Dataset, K-MHaS, consists of 109,692 utteranc
 
 The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset, but a lot of parts have changed to evaluate the performance of various content filtering scenarios such as An inappropriate input prompt(ResponsibleAIPolicyViolation), won't return any content when the content is filtered (prompt content filter and completion_filter) 
 
-## Results
+## Test results (using 2000 sample data)
 
 ### GPT4o
 |         |                                  |low threshold<br>(custom filter) |      |default2      |       |high threshold<br>(custom filter)|       |
@@ -121,10 +121,8 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 |Not Hate Speech|-                                        |257          |0.242 |23      |0.022 |3             |0.003 |
 
 
-### Example of filtered contents using custom low threshold content filter
-
-
-
+### Example of filtered contents with gpt-4o-mini using custom low threshold
+![Example of filtered contents with gpt-4o-mini](images/content-filter-sample.png)
 
 ## Quick Start
 
