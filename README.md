@@ -123,7 +123,7 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 
 ### Example of filtered contents with gpt-4o-mini using custom low threshold
 You can review the test results in the Results folder to see exactly what types of content were filtered. Here is an example of filtered content in the system log. 
-![Example of filtered contents with gpt-4o-mini](images/content-filter-sample.png)
+![Example of filtered contents with gpt-4o-mini](images/content-filter-sample2.png)
 
 ## Quick Start
 
