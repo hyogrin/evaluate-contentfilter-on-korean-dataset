@@ -16,7 +16,7 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 
 ## Test results (using 2000 sample data)
 
-### GPT4o
+### GPT-4o
 |         |                                  |low threshold<br>(custom filter) |      |default2      |       |high threshold<br>(custom filter)|       |
 |---------------|-----------------------------------------|--------------|-------------|--------------|-------------|--------------|-------------|
 |category_big   |category                                 |count         |mean         |count         |mean         |count         |mean         |
@@ -63,12 +63,12 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 |Hate Speech    |['Religion', 'Race']                     |0             |0.000        |0             |0.000        |0             |0.000        |
 |Hate Speech    |['Religion']                             |25            |0.446        |1             |0.018        |0             |0.000        |
 |Not Hate Speech|['Not Hate Speech']                      |134           |0.126        |15            |0.014        |1             |0.001        |
-|Filtering Total|                                         |              |             |              |             |              |             |
-|Hate Speech    |-                                        |390           |0.416        |40            |0.043        |7             |0.007        |
-|Not Hate Speech|-                                        |134           |0.126        |15            |0.014        |1             |0.001        |
+|**Filtering Total**|                                         |              |             |              |             |              |             |
+|**Hate Speech**    |-                                        |**390**           |**0.416**        |**40**            |**0.043**      |**7**             |**0.007**        |
+|**Not Hate Speech**|-                                        |**134**           |**0.126**        |**15**            |**0.014**        |**1**             |**0.001**        |
 
 
-### GPT4o-mini
+### GPT-4o-mini
 
 |         |                                   |low threshold<br>(custom filter)||default2||high threshold<br>(custom filter)||
 |---------------|-----------------------------------------|-------------|------|--------|------|--------------|------|
@@ -116,9 +116,9 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 |Hate Speech    |['Religion', 'Race']                     |1            |1.000 |0       |0.000 |0             |0.000 |
 |Hate Speech    |['Religion']                             |40           |0.714 |2       |0.036 |1             |0.018 |
 |Not Hate Speech|['Not Hate Speech']                      |257          |0.242 |23      |0.022 |3             |0.003 |
-|Filtering Total|                                         |             |      |        |      |              |      |
-|Hate Speech    |-                                        |562          |0.599 |54      |0.058 |13            |0.014 |
-|Not Hate Speech|-                                        |257          |0.242 |23      |0.022 |3             |0.003 |
+|**Filtering Total**|                                         |             |      |        |      |              |      |
+|**Hate Speech**    |-                                        |**562**          |**0.599** |**54**      |**0.058** |**13**            |**0.014** |
+|**Not Hate Speech**|-                                        |**257**          |**0.242** |**23**      |**0.022** |**3**             |**0.003** |
 
 
 ### Example of filtered contents with gpt-4o-mini using custom low threshold
@@ -160,7 +160,7 @@ python main.py
 parser.add_argument("--num_samples", type=int, default=2000)
 parser.add_argument("--is_random", type=bool, default=False)
 parser.add_argument("--is_debug", type=bool, default=False)
-parser.add_argument("--num_debug_samples", type=int, default=100)
+parser.add_argument("--num_debug_samples", type=int, default=15)
 parser.add_argument("--model_provider", type=str, default="azureopenai")
 parser.add_argument("--max_retries", type=int, default=3)
 parser.add_argument("--max_tokens", type=int, default=256)
