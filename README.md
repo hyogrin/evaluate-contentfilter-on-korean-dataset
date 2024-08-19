@@ -12,14 +12,14 @@ The Korean Multi-label Hate Speech Dataset, K-MHaS, consists of 109,692 utteranc
 
 ## Implementation
 
-The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset, but a lot of parts have changed to evaluate the performance of various content filtering scenarios such as An inappropriate input prompt(ResponsibleAIPolicyViolation), won't return any content when the content is filtered (prompt content filter and completion_filter) 
+The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset, but a lot of parts have changed to evaluate the performance of various content filtering scenarios such as An inappropriate input prompt(ResponsibleAIPolicyViolation), won't return any content when the content is filtered (prompt content filter and completion_filter).
 
 ## Test results (using 2000 sample data)
 
 ### GPT-4o
 |         |                                  |low threshold<br>(custom filter) |      |default2      |       |high threshold<br>(custom filter)|       |
 |---------------|-----------------------------------------|--------------|-------------|--------------|-------------|--------------|-------------|
-|category_big   |category                                 |count         |mean         |count         |mean         |count         |mean         |
+|category_big   |category                                 |filtered<br>count         |mean         |filtered<br>count         |mean         |filtered<br>count         |mean         |
 |Hate Speech    |['Age', 'Gender', 'Religion']            |3             |1.000        |0             |0.000        |0             |0.000        |
 |Hate Speech    |['Age', 'Gender']                        |3             |0.375        |1             |0.125        |0             |0.000        |
 |Hate Speech    |['Age', 'Profanity']                     |2             |0.400        |0             |0.000        |0             |0.000        |
@@ -72,7 +72,7 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 
 |         |                                   |low threshold<br>(custom filter)||default2||high threshold<br>(custom filter)||
 |---------------|-----------------------------------------|-------------|------|--------|------|--------------|------|
-|category_big   |category                                 |count        |mean  |count   |mean  |count         |mean  |
+|category_big   |category                                 |filtered<br>count        |mean  |filtered<br>count   |mean  |filtered<br>count         |mean  |
 |Hate Speech    |['Age', 'Gender', 'Religion']            |2            |0.667 |0       |0.000 |0             |0.000 |
 |Hate Speech    |['Age', 'Gender']                        |3            |0.375 |0       |0.000 |0             |0.000 |
 |Hate Speech    |['Age', 'Profanity']                     |3            |0.600 |0       |0.000 |0             |0.000 |
