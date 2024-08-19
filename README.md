@@ -19,7 +19,7 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 ### GPT-4o
 |         |                                  |low threshold<br>(custom filter) |      |default2      |       |high threshold<br>(custom filter)|       |
 |---------------|-----------------------------------------|--------------|-------------|--------------|-------------|--------------|-------------|
-|category_big   |category                                 |filtered<br>count         |mean         |filtered<br>count         |mean         |filtered<br>count         |mean         |
+|category_big   |category                                 |filtered<br>count         |filtered<br>mean         |filtered<br>count         |filtered<br>mean         |filtered<br>count         |filtered<br>mean         |
 |Hate Speech    |['Age', 'Gender', 'Religion']            |3             |1.000        |0             |0.000        |0             |0.000        |
 |Hate Speech    |['Age', 'Gender']                        |3             |0.375        |1             |0.125        |0             |0.000        |
 |Hate Speech    |['Age', 'Profanity']                     |2             |0.400        |0             |0.000        |0             |0.000        |
@@ -72,7 +72,7 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 
 |         |                                   |low threshold<br>(custom filter)||default2||high threshold<br>(custom filter)||
 |---------------|-----------------------------------------|-------------|------|--------|------|--------------|------|
-|category_big   |category                                 |filtered<br>count        |mean  |filtered<br>count   |mean  |filtered<br>count         |mean  |
+|category_big   |category                                 |filtered<br>count        |filtered<br>mean  |filtered<br>count   |filtered<br>mean  |filtered<br>count         |filtered<br>mean  |
 |Hate Speech    |['Age', 'Gender', 'Religion']            |2            |0.667 |0       |0.000 |0             |0.000 |
 |Hate Speech    |['Age', 'Gender']                        |3            |0.375 |0       |0.000 |0             |0.000 |
 |Hate Speech    |['Age', 'Profanity']                     |3            |0.600 |0       |0.000 |0             |0.000 |
