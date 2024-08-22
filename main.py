@@ -18,6 +18,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score, recall_score
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 
 def format_timespan(seconds):
@@ -168,7 +169,7 @@ def evaluate(csv_path="results/[HateSpeech] gpt-4o-mini-2024-08-13.csv"):
 
     plot_path = f"results/{MODEL_NAME}-{MODEL_VERSION}_confusion_matrix.png"
     # Plot the confusion matrix
-    plot_confusion_matrix(plot_path, precision, recall, cm, labels=['Hate Speech', 'Not Hate Speech'])
+    plot_confusion_matrix(plot_path, precision, recall, cm, labels=['True - Hate Speech', 'False - Not Hate Speech'])
 
     
     category_big_count = result.groupby(['category_big']).agg(
@@ -182,12 +183,20 @@ def evaluate(csv_path="results/[HateSpeech] gpt-4o-mini-2024-08-13.csv"):
     category_count.to_csv(f"evals/[HateSpeech] eval-{filename}.csv", index=False)
     category_big_count.to_csv(f"evals/[HateSpeech] eval-avg-{filename}.csv", index=False)
 
-def plot_confusion_matrix(plot_path, precision, recall, cm, labels):
+def plot_confusion_matrix(plot_path,  precision, recall, cm, labels):
+    group_name = ['True Pos','False Neg','False Pos','True Neg']
+    group_counts = ["{0:0.0f}".format(value) for value in
+                    cm.flatten()]
+    maplabels = [f"{v1}\n{v2}" for v1, v2 in
+            zip(group_name,group_counts)]
+    maplabels = np.asarray(maplabels).reshape(2,2)
     plt.figure(figsize=(10, 7))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    sns.heatmap(cm, annot=maplabels, fmt='', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    #sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
-    plt.title(f'Confusion Matrix\nPrecision: {precision:.2f}, Recall: {recall:.2f}')
+    plot_title = plot_path.replace("results/", "").replace(".png", "")
+    plt.title(f'{plot_title}\nPrecision: {precision:.2f}, Recall: {recall:.2f}')
     plt.savefig(plot_path)
     plt.close()
 

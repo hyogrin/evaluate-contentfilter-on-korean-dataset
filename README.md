@@ -67,7 +67,11 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 |**Hate Speech**    |-                                        |**390**           |**0.416**        |**40**            |**0.043**      |**7**             |**0.007**        |
 |**Not Hate Speech**|-                                        |**134**           |**0.126**        |**15**            |**0.014**        |**1**             |**0.001**        |
 
+![Confusion Matrix of the gpt-4o content filtering - low](results/gpt-4o-2024-05-13-low_confusion_matrix.png)
+
 ![Confusion Matrix of the gpt-4o content filtering - default2](results/gpt-4o-2024-05-13-default2_confusion_matrix.png)
+
+![Confusion Matrix of the gpt-4o content filtering - high](results/gpt-4o-2024-05-13-high_confusion_matrix.png)
 
 ### GPT-4o-mini
 
@@ -121,7 +125,11 @@ The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset,
 |**Hate Speech**    |-                                        |**562**          |**0.599** |**54**      |**0.058** |**13**            |**0.014** |
 |**Not Hate Speech**|-                                        |**257**          |**0.242** |**23**      |**0.022** |**3**             |**0.003** |
 
+![Confusion Matrix of the gpt-4o-mini content filtering - Low](results/gpt-4o-mini-2024-07-18-low_confusion_matrix.png)
+
 ![Confusion Matrix of the gpt-4o-mini content filtering - default2](results/gpt-4o-mini-2024-07-18-default2_confusion_matrix.png)
+
+![Confusion Matrix of the gpt-4o-mini content filtering - High](results/gpt-4o-mini-2024-07-18-high_confusion_matrix.png)
 
 ### Example of filtered contents with gpt-4o-mini using custom low threshold
 You can review the test results in the Results folder to see exactly what types of content were filtered. Here is an example of filtered content in the system log. 

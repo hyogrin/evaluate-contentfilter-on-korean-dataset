@@ -1,0 +1,16 @@
+id,category,filtered,content,summary,prompt_filter_result,completion_filter_result
+0,['Not Hate Speech'],False,그만큼 길예르모가 잘했다고 보면되겠지 기대되네 셰이프 오브 워터,길예르모의 성과에 대한 기대감이 높다.,{},{}
+1,"['Physical', 'Age']",True,"""1. 8넘의 문재앙""",,{},"{'filtered': True, 'category': 'violence', 'severity': 'low'}"
+2,['Physical'],False,"""문재인 정권의 내로남불은 타의 추종을 불허하네. 자한당 욕할거리도 없음.""","문재인 정권의 내로남불이 심각하며, 자한당은 비판할 점이 없다는 내용.",{},{}
+3,['Politics'],True,"""짱개들 지나간 곳은 폐허된다 ㅋㅋ""",,{},"{'filtered': True, 'category': 'hate', 'severity': 'medium'}"
+4,['Not Hate Speech'],False,곱창은 자갈치~~~~~,곱창은 자갈치와 관련이 있다.,{},{}
+5,['Origin'],False,밥맛없게생겼냐,밥이 맛없어 보인다.,{},{}
+6,['Not Hate Speech'],False,알고 보니 외국 국적? 또는 국가유공자?,외국 국적 또는 국가유공자에 대한 내용.,{},{}
+7,['Not Hate Speech'],True,"""중국 유학생, 중국인들 입국 금지시키고 그들을 위해 쓰여질 많은 세금을 줄여""",,{},"{'filtered': True, 'category': 'hate', 'severity': 'low'}"
+8,"['Politics', 'Religion']",False,"""댓글 길게 쓴거보니 우리 도태한녀 화 많이 났넹 ㅋㅋ 우쭈쭈""",댓글이 길어져서 화가 난 것 같다는 내용.,{},{}
+9,['Not Hate Speech'],False,이미연 닮음,이미연과의 유사성.,{},{}
+10,['Not Hate Speech'],True,"""관악 신림동이면 조선족.부랑자들 겁나많은곳.. 이 쪽에서 진상부리다간 칼 부림 난다..""",,,"{'hate': {'filtered': True, 'severity': 'low'}, 'jailbreak': {'filtered': False, 'detected': False}, 'self_harm': {'filtered': False, 'severity': 'safe'}, 'sexual': {'filtered': False, 'severity': 'safe'}, 'violence': {'filtered': False, 'severity': 'safe'}}"
+11,['Politics'],False,"""ㄴ 짱1 깨 수준에 맞긴 하겠네""","""ㄴ 짱1 깨 수준에 맞다""",{},{}
+12,['Origin'],True,짜리몽땅해서 별로일꺼 같은데..얼굴이 이쁘니 뭐 그걸로 된거지~,,{},"{'filtered': True, 'category': 'hate', 'severity': 'low'}"
+13,['Not Hate Speech'],False,진짜 요새느끼는건데 4대보험공제가 제일무서움 이건 쨉도안되징,4대보험 공제가 가장 두렵다는 느낌.,{},{}
+14,['Not Hate Speech'],False,아비가일 입담 좋네요^^,아비가일의 말솜씨가 좋다.,{},{}

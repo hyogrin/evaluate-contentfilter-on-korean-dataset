@@ -1,0 +1,7 @@
+category_big,category,filtered_count,filtered_mean
+Hate Speech,['Origin'],1,0.5
+Hate Speech,"['Physical', 'Age']",1,1.0
+Hate Speech,['Physical'],0,0.0
+Hate Speech,"['Politics', 'Religion']",0,0.0
+Hate Speech,['Politics'],1,0.5
+Not Hate Speech,['Not Hate Speech'],2,0.25
