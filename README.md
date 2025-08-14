@@ -269,17 +269,17 @@ CONTENT_SAFETY_THRESHOLD=4
 - [evaluation report](results/[content_filter]-DefaultV2-medium-2025-08-14-16-33-59_en_report.html)
 
 ### 🏆 Performance Review
-    - Most Practical Default Setting
-    We recommend starting with ACS(Azure Content Safety) Medium (3–4). It is similar to or slightly better than CF(Content Filter) Medium, with accuracy of 0.71 vs. 0.69 and lower false positives (FPR 0.197 vs. 0.212), providing a good balance between catching harmful content and avoiding over-blocking.
+- Most Practical Default Setting
+We recommend starting with ACS(Azure Content Safety) Medium (3–4). It is similar to or slightly better than CF(Content Filter) Medium, with accuracy of 0.71 vs. 0.69 and lower false positives (FPR 0.197 vs. 0.212), providing a good balance between catching harmful content and avoiding over-blocking.
 
-    - Maximum Blocking 
-    CF(Content Filter) High or ACS(Azure Content Safety) Low (1–2) achieve higher recall but have very high false positive rates (CF High FPR: 0.606, ACS 1–2 FPR: 0.682). 
+- Maximum Blocking 
+CF(Content Filter) High or ACS(Azure Content Safety) Low (1–2) achieve higher recall but have very high false positive rates (CF High FPR: 0.606, ACS 1–2 FPR: 0.682). 
 
-    - Minimum Blocking 
-    CF(Content Filter) Low or ACS(Azure Content Safety) High (5–6) achieve the lowest block rate — very low FPR but extremely high FNR (i.e., high precision, very low recall). In this sample evaluation showed FPR ≈ 0.015 and FNR ≈ 0.97, meaning most harmful content slips through while safe messages are almost never blocked.
+- Minimum Blocking 
+CF(Content Filter) Low or ACS(Azure Content Safety) High (5–6) achieve the lowest block rate — very low FPR but extremely high FNR (i.e., high precision, very low recall). In this sample evaluation showed FPR ≈ 0.015 and FNR ≈ 0.97, meaning most harmful content slips through while safe messages are almost never blocked.
 
-    - Caution
-    Korean is not an officially supported language, so model performance may vary. This report is based on a small sample size (100), meaning decisions should be made under a “multi-layer defense + continuous tuning” approach rather than relying solely on a single static configuration.
+- Caution
+Korean is not an officially supported language, so model performance may vary. This report is based on a small sample size (100), meaning decisions should be made under a “multi-layer defense + continuous tuning” approach rather than relying solely on a single static configuration.
 
 ---
 
