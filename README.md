@@ -47,15 +47,17 @@ The content filtering models for the hate, sexual, violence, and self-harm categ
 | High                                   | Low (1–2)                                  | Content Filter: Blocks almost everything suspicious.<br>Content Safety: Detects even mild or borderline harmful content. |
 
 ### 🎯 Visual Level Diagram
-Content Filter (Blocking Threshold)
-Low ──▢▢──────────── High
-Less Blocking More Blocking
+<pre>
+Content Filter (Blocking Threshold) <br>
+Low ──▢▢──────────── High <br>
+Less Blocking       More Blocking
+</pre>
 
-Content Safety (Severity Level)
-Low ──■■──────────── High
-More Sensitive Less Sensitive
-(Detects mild cases) (Only severe cases)
-
+<pre>
+Content Safety (Severity Level) <br>
+Low ──■■──────────── High <br>
+More Sensitive      Less Sensitive
+</pre>
 
 **Legend:**  
 - **▢▢** = Blocking intensity in Content Filter  
