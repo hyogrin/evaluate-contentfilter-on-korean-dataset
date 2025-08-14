@@ -1,0 +1,21 @@
+[project]
+name = "evaluate-contentfilter-on-korean-dataset"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets==4.0.0",
+    "huggingface-hub==0.34.4",
+    "numpy==2.3.2",
+    "openai==1.99.9",
+    "pandas==2.3.1",
+    "python-dotenv==1.1.1",
+    "regex==2025.7.34",
+    "requests==2.32.4",
+    "safetensors==0.6.2",
+    "scikit-learn==1.7.1",
+    "seaborn==0.13.2",
+    "tqdm==4.67.1",
+    "azure-ai-contentsafety==1.0.0"
+]

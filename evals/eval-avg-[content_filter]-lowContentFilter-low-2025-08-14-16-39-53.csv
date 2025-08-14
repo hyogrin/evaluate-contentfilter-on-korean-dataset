@@ -1,0 +1,3 @@
+category_big,total_count,filtered_count,filtered_mean
+Hate Speech,34,1,0.029411764705882353
+Not Hate Speech,66,1,0.015151515151515152

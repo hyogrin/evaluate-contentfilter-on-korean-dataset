@@ -1,182 +1,276 @@
-# Content Filter evaluation tool using By Korean hate-speech dataset
+# Content Filter evaluation tool using Korean hate-speech dataset
 
 ## Overview
 
-Azure OpenAI Service includes a content filtering system that works alongside LLM, including image generation models. This system works by running both the prompt and completion through an ensemble of classification models designed to detect and prevent the output of harmful content.  The content filtering models for the hate, sexual, violence, and self-harm categories support English, German, Japanese, Spanish, French, Italian, Portuguese, and Chinese. The service can work in many other languages however, the quality may vary which means that testing is essential especially for non-supported language such as Korean. In addition, even if you set up the content filter for a supported language, you need to test it to ensure that your filter detects the content at the severity levels you set up for prompts and completions. This tool performs benchmarking on hate-speech dataset with minimal time and effort, allowing you to understand the current performance of your established content filter, what types of content have been filtered, and to configure appropriate levels of your content filter.  
+Azure OpenAI Service includes a content filtering system that works alongside LLM, including image generation models. This system works by running both the prompt and completion through an ensemble of classification models designed to detect and prevent the output of harmful content. This tool evaluates two different content safety approaches:
+
+1. **Content Filter**: Azure OpenAI's built-in content filtering system
+2. **Content Safety**: Azure Content Safety service for dedicated content analysis
+
+The content filtering models for the hate, sexual, violence, and self-harm categories support English, German, Japanese, Spanish, French, Italian, Portuguese, and Chinese. The service can work in many other languages however, the quality may vary which means that testing is essential especially for non-supported language such as Korean. In addition, even if you set up the content filter for a supported language, you need to test it to ensure that your filter detects the content at the severity levels you set up for prompts and completions. This tool performs benchmarking on hate-speech dataset with minimal time and effort, allowing you to understand the current performance of your established content filter, what types of content have been filtered, and to configure appropriate levels of your content filter.
+
+## Features
+
+- **Multi-processing support**: Parallel execution for faster processing
+- **Batch processing**: Configurable batch sizes for optimal performance
+- **Multiple evaluation targets**: 
+  - `content_filter`: Azure OpenAI Content Filter evaluation
+  - `content_safety`: Azure Content Safety service evaluation
+- **Multiple model configurations**: Support for different deployment configurations
+- **Environment-based configuration**: Support for multiple `.env` files for different deployments
 
 
-### The Korean Multi-label Hate Speech Dataset, K-MHaS
-The Korean Multi-label Hate Speech Dataset, K-MHaS, consists of 109,692 utterances from Korean online news comments, labelled with 8 fine-grained hate speech classes (labels: Politics, Origin, Physical, Age, Gender, Religion, Race, Profanity) or Not Hate Speech class. Each utterance provides from a single to four labels that can handles Korean language patterns effectively. For more details, please refer to our paper about K-MHaS, published at COLING 2022. 
+## Blocking Threshold in Content Filter VS Severity Level in Content Safety
 
-- [Paper](https://aclanthology.org/2022.coling-1.311/), [Hugging Face](https://huggingface.co/datasets/jeanlee/kmhas_korean_hate_speech)
+> ⚠ **Important:**  
+> The meaning of "higher" and "lower" levels is **opposite** between Content Filter's **Blocking Threshold** and Content Safety's **Severity Level**.
+> 
+> - **Content Filter (Blocking Threshold)**: Higher → blocks **more** content.  
+> - **Content Safety (Severity Level)**: Lower → detects **more** harmful content.
 
-## Implementation
+---
 
-The code is reused https://github.com/daekeun-ml/evaluate-llm-on-korean-dataset, but a lot of parts have changed to evaluate the performance of various content filtering scenarios such as An inappropriate input prompt(ResponsibleAIPolicyViolation), won't return any content when the content is filtered (prompt content filter and completion_filter).
+### 📌 Easy Explanation
+- **Content Filter**: **Low → blocks less**, **High → blocks more**  
+- **Content Safety**: **Low (1–2) → highly sensitive**, **High (5–6) → only catches the most severe**  
+- In other words, **"Low"** in Content Filter ≠ **"Low"** in Content Safety. They mean the opposite.
 
-## Test results (using 2000 sample data)
+---
 
-### GPT-4o
-|         |                                  |low threshold<br>(custom filter) |      |default2      |       |high threshold<br>(custom filter)|       |
-|---------------|-----------------------------------------|--------------|-------------|--------------|-------------|--------------|-------------|
-|category_big   |category                                 |filtered<br>count         |filtered<br>mean         |filtered<br>count         |filtered<br>mean         |filtered<br>count         |filtered<br>mean         |
-|Hate Speech    |['Age', 'Gender', 'Religion']            |3             |1.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Age', 'Gender']                        |3             |0.375        |1             |0.125        |0             |0.000        |
-|Hate Speech    |['Age', 'Profanity']                     |2             |0.400        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Age', 'Race']                          |2             |1.000        |1             |0.500        |0             |0.000        |
-|Hate Speech    |['Age', 'Religion']                      |10            |0.625        |0             |0.000        |1             |0.063        |
-|Hate Speech    |['Age']                                  |51            |0.288        |6             |0.034        |0             |0.000        |
-|Hate Speech    |['Gender', 'Religion']                   |4             |0.444        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Gender']                               |23            |0.284        |3             |0.037        |1             |0.012        |
-|Hate Speech    |['Origin', 'Age', 'Religion']            |0             |0.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Origin', 'Age']                        |13            |0.591        |2             |0.091        |0             |0.000        |
-|Hate Speech    |['Origin', 'Gender']                     |0             |0.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Origin', 'Physical', 'Age']            |1             |0.500        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Origin', 'Physical']                   |1             |0.200        |0             |0.000        |1             |0.200        |
-|Hate Speech    |['Origin', 'Religion']                   |6             |0.333        |1             |0.056        |0             |0.000        |
-|Hate Speech    |['Origin']                               |29            |0.326        |5             |0.056        |0             |0.000        |
-|Hate Speech    |['Physical', 'Age', 'Gender']            |1             |0.333        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Physical', 'Age']                      |13            |0.481        |2             |0.074        |1             |0.037        |
-|Hate Speech    |['Physical', 'Gender', 'Profanity']      |0             |0.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Physical', 'Gender', 'Religion']       |0             |0.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Physical', 'Gender']                   |9             |0.375        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Physical', 'Profanity']                |1             |0.250        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Physical', 'Religion']                 |1             |0.250        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Physical']                             |41            |0.333        |2             |0.016        |0             |0.000        |
-|Hate Speech    |['Politics', 'Age', 'Gender']            |1             |0.500        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Age', 'Religion']          |3             |1.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Age']                      |15            |0.600        |1             |0.040        |1             |0.040        |
-|Hate Speech    |['Politics', 'Gender', 'Religion']       |0             |0.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Gender']                   |1             |0.500        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Origin', 'Age', 'Religion']|1             |1.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Origin', 'Age']            |1             |1.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Origin', 'Religion']       |1             |0.500        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Origin']                   |1             |1.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Physical', 'Age']          |1             |0.250        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Physical', 'Religion']     |1             |1.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Physical']                 |15            |0.682        |1             |0.045        |0             |0.000        |
-|Hate Speech    |['Politics', 'Profanity']                |1             |0.500        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics', 'Religion']                 |11            |0.550        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Politics']                             |76            |0.598        |11            |0.087        |2             |0.016        |
-|Hate Speech    |['Profanity']                            |20            |0.541        |2             |0.054        |0             |0.000        |
-|Hate Speech    |['Race']                                 |2             |0.500        |1             |0.250        |0             |0.000        |
-|Hate Speech    |['Religion', 'Race']                     |0             |0.000        |0             |0.000        |0             |0.000        |
-|Hate Speech    |['Religion']                             |25            |0.446        |1             |0.018        |0             |0.000        |
-|Not Hate Speech|['Not Hate Speech']                      |134           |0.126        |15            |0.014        |1             |0.001        |
-|**Filtering Total**|                                         |              |             |              |             |              |             |
-|**Hate Speech**    |-                                        |**390**           |**0.416**        |**40**            |**0.043**      |**7**             |**0.007**        |
-|**Not Hate Speech**|-                                        |**134**           |**0.126**        |**15**            |**0.014**        |**1**             |**0.001**        |
+### 🔍 Comparison Table
 
-![Confusion Matrix of the gpt-4o content filtering - low](results/gpt-4o-2024-05-13-low_confusion_matrix.png)
+| Content Filter<br>(Blocking Threshold) | Content Safety<br>(Severity Level) | Description |
+|----------------------------------------|--------------------------------------|-------------|
+| Low                                    | High (5–6)                                  | Content Filter: Blocks mild cases only.<br>Content Safety: Catches only the most severe harmful content. |
+| Medium                                 | Medium (3–4)                                  | Content Filter: Balanced blocking.<br>Content Safety: Catches moderate harmful content. |
+| High                                   | Low (1–2)                                  | Content Filter: Blocks almost everything suspicious.<br>Content Safety: Detects even mild or borderline harmful content. |
 
-![Confusion Matrix of the gpt-4o content filtering - default2](results/gpt-4o-2024-05-13-default2_confusion_matrix.png)
+---
 
-![Confusion Matrix of the gpt-4o content filtering - high](results/gpt-4o-2024-05-13-high_confusion_matrix.png)
+### 🎯 Visual Level Diagram
+Content Filter (Blocking Threshold)
+Low ──▢▢──────────── High
+Less Blocking More Blocking
 
-### GPT-4o-mini
+Content Safety (Severity Level)
+Low ──■■──────────── High
+More Sensitive Less Sensitive
+(Detects mild cases) (Only severe cases)
 
-|         |                                   |low threshold<br>(custom filter)||default2||high threshold<br>(custom filter)||
-|---------------|-----------------------------------------|-------------|------|--------|------|--------------|------|
-|category_big   |category                                 |filtered<br>count        |filtered<br>mean  |filtered<br>count   |filtered<br>mean  |filtered<br>count         |filtered<br>mean  |
-|Hate Speech    |['Age', 'Gender', 'Religion']            |2            |0.667 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Age', 'Gender']                        |3            |0.375 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Age', 'Profanity']                     |3            |0.600 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Age', 'Race']                          |2            |1.000 |2       |1.000 |0             |0.000 |
-|Hate Speech    |['Age', 'Religion']                      |10           |0.625 |2       |0.125 |0             |0.000 |
-|Hate Speech    |['Age']                                  |83           |0.469 |7       |0.040 |3             |0.017 |
-|Hate Speech    |['Gender', 'Religion']                   |6            |0.667 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Gender']                               |30           |0.370 |2       |0.025 |0             |0.000 |
-|Hate Speech    |['Origin', 'Age', 'Religion']            |1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Origin', 'Age']                        |17           |0.773 |3       |0.136 |0             |0.000 |
-|Hate Speech    |['Origin', 'Gender']                     |0            |0.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Origin', 'Physical', 'Age']            |2            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Origin', 'Physical']                   |3            |0.600 |1       |0.200 |1             |0.200 |
-|Hate Speech    |['Origin', 'Religion']                   |8            |0.444 |1       |0.056 |1             |0.056 |
-|Hate Speech    |['Origin']                               |51           |0.573 |2       |0.022 |0             |0.000 |
-|Hate Speech    |['Physical', 'Age', 'Gender']            |1            |0.333 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Physical', 'Age']                      |19           |0.704 |2       |0.074 |0             |0.000 |
-|Hate Speech    |['Physical', 'Gender', 'Profanity']      |0            |0.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Physical', 'Gender', 'Religion']       |0            |0.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Physical', 'Gender']                   |14           |0.583 |1       |0.042 |1             |0.042 |
-|Hate Speech    |['Physical', 'Profanity']                |3            |0.750 |1       |0.250 |0             |0.000 |
-|Hate Speech    |['Physical', 'Religion']                 |3            |0.750 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Physical']                             |77           |0.626 |6       |0.049 |2             |0.016 |
-|Hate Speech    |['Politics', 'Age', 'Gender']            |1            |0.500 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Age', 'Religion']          |3            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Age']                      |21           |0.840 |4       |0.160 |0             |0.000 |
-|Hate Speech    |['Politics', 'Gender', 'Religion']       |1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Gender']                   |1            |0.500 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Origin', 'Age', 'Religion']|1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Origin', 'Age']            |1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Origin', 'Religion']       |1            |0.500 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Origin']                   |1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Physical', 'Age']          |4            |1.000 |1       |0.250 |0             |0.000 |
-|Hate Speech    |['Politics', 'Physical', 'Religion']     |1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Physical']                 |17           |0.773 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Profanity']                |2            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Politics', 'Religion']                 |16           |0.800 |1       |0.050 |0             |0.000 |
-|Hate Speech    |['Politics']                             |85           |0.669 |12      |0.094 |2             |0.016 |
-|Hate Speech    |['Profanity']                            |24           |0.649 |2       |0.054 |1             |0.027 |
-|Hate Speech    |['Race']                                 |3            |0.750 |2       |0.500 |1             |0.250 |
-|Hate Speech    |['Religion', 'Race']                     |1            |1.000 |0       |0.000 |0             |0.000 |
-|Hate Speech    |['Religion']                             |40           |0.714 |2       |0.036 |1             |0.018 |
-|Not Hate Speech|['Not Hate Speech']                      |257          |0.242 |23      |0.022 |3             |0.003 |
-|**Filtering Total**|                                         |             |      |        |      |              |      |
-|**Hate Speech**    |-                                        |**562**          |**0.599** |**54**      |**0.058** |**13**            |**0.014** |
-|**Not Hate Speech**|-                                        |**257**          |**0.242** |**23**      |**0.022** |**3**             |**0.003** |
 
-![Confusion Matrix of the gpt-4o-mini content filtering - Low](results/gpt-4o-mini-2024-07-18-low_confusion_matrix.png)
+**Legend:**  
+- **▢▢** = Blocking intensity in Content Filter  
+- **■■** = Detection sensitivity in Content Safety  
 
-![Confusion Matrix of the gpt-4o-mini content filtering - default2](results/gpt-4o-mini-2024-07-18-default2_confusion_matrix.png)
+---
 
-![Confusion Matrix of the gpt-4o-mini content filtering - High](results/gpt-4o-mini-2024-07-18-high_confusion_matrix.png)
+### 💡 Quick Memory Tip
+- **Content Filter**: *Low → blocks less*  
+- **Content Safety**: *Low → detects more*
 
-### Example of filtered contents with gpt-4o-mini using custom low threshold
-You can review the test results in the Results folder to see exactly what types of content were filtered. Here is an example of filtered content in the system log. 
-![Example of filtered contents with gpt-4o-mini](images/content-filter-sample2.png)
+## Usage
 
-## Quick Start
+### Prerequisites
 
-### GitHub Codespace
-Please start a new project by connecting to Codespace Project. The environment required for hands-on is automatically configured through devcontainer, so you only need to run a Jupyter notebook.
-
-### Your Local PC
-Please start by installing the required packages on your local PC with
-
+1. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-Please do not forget to modify the .env file to match your account. Rename `.env.sample` to `.env` or copy and use it
+2. Configure environment files using .env.sample:
+   - `.env_gpt-4-nano-low`: Configuration for low filtering threshold
+   - `.env_gpt-4-nano-high`: Configuration for high filtering threshold
 
-### Modify your .env
+### Command Line Arguments
 
-```ini
-AZURE_OPENAI_ENDPOINT=<YOUR_OPEN_ENDPOINT>
-AZURE_OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
-AZURE_OPENAI_API_VERSION=<YOUR_OPENAI_API_VERSION>
-AZURE_OPENAI_DEPLOYMENT_NAME=<YOUR_DEPLOYMENT_NAME> (e.g., gpt-4o-mini)>
-OPENAI_MODEL_VERSION=<YOUR_OPENAI_MODEL_VERSION> (e.g., 2024-07-18)>
-```
-
-Execute the command to perform the evaluation. (The evaluation results are saved in the `./results` folder and `./evals`.)
-   
 ```bash
-python main.py
+python main.py [OPTIONS]
 
+Options:
+  --num_samples INT          Number of samples to process (default: 2000)
+  --is_random BOOL          Whether to randomize samples (default: False) 
+  --is_debug BOOL           Debug mode (default: False)
+  --num_debug_samples INT   Number of debug samples (default: 15)
+  --model_provider STR      Model provider (default: azureopenai)
+  --hf_model_id STR         Hugging Face model ID (default: gpt-4-nano)
+  --max_retries INT         Maximum retry attempts (default: 3)
+  --max_tokens INT          Maximum tokens (default: 256)
+  --temperature FLOAT       Temperature (default: 0)
+  --batch_size INT          Batch size (default: 10)
+  --evaluation_target STR   Evaluation target: content_filter or content_safety
+  --use_multiprocessing BOOL Enable multiprocessing (default: True)
+  --max_workers INT         Maximum worker processes (default: 3)
+  --locale STR              Output language (default: ko-KR)
 ```
+
+
 
 ### Tunable parameters
 ```python
-parser.add_argument("--num_samples", type=int, default=2000)
-parser.add_argument("--is_random", type=bool, default=False)
-parser.add_argument("--is_debug", type=bool, default=False)
-parser.add_argument("--num_debug_samples", type=int, default=15)
-parser.add_argument("--model_provider", type=str, default="azureopenai")
-parser.add_argument("--max_retries", type=int, default=3)
-parser.add_argument("--max_tokens", type=int, default=256)
-parser.add_argument("--temperature", type=float, default=0)
+    parser.add_argument("--num_samples", type=int, default=2000)
+    parser.add_argument("--is_random", type=str2bool, default=False)
+    parser.add_argument("--is_debug", type=str2bool, default=True)
+    parser.add_argument("--num_debug_samples", type=int, default=30)
+    parser.add_argument("--model_provider", type=str, default="azureopenai")
+    parser.add_argument("--split", type=str, default="valid")
+    parser.add_argument("--max_retries", type=int, default=3)
+    parser.add_argument("--max_tokens", type=int, default=256)
+    parser.add_argument("--temperature", type=float, default=0)
+    parser.add_argument("--batch_size", type=int, default=5)
+    parser.add_argument("--evaluation_target", type=str, default="content_filter", 
+                       choices=["content_filter", "content_safety"],
+                       help="Target evaluation: content_filter (Azure OpenAI Content Filter) or content_safety (Azure Content Safety)")
+    
+    parser.add_argument("--use_multiprocessing", type=str2bool, default=True, help="Enable multiprocessing")
+    parser.add_argument("--max_workers", type=int, default=3, help="Maximum number of worker processes")
+    
+    parser.add_argument("--locale", type=str, default="ko-KR", 
+                       choices=["ko-KR", "en-US"],
+                       help="Output language: ko-KR (Korean) or en-US (English)")
 ```
+
+
+### Running Evaluations
+
+#### Single Evaluation
+```bash
+# Content Filter evaluation
+DOTENV_PATH=.env_gpt-4-nano-low python main.py --evaluation_target content_filter
+
+# Content Safety evaluation  
+DOTENV_PATH=.env_gpt-4-nano-low python main.py --evaluation_target content_safety
+```
+
+#### Batch Evaluation
+```bash
+# Run all evaluations for multiple models and evaluation targets
+./run_all_env.sh
+```
+
+### Environment Configuration
+
+#### For Azure OpenAI Content Filter 
+```bash
+AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com/
+AZURE_OPENAI_API_KEY=your-api-key-here
+AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4-nano-low
+AZURE_OPENAI_API_VERSION=2024-02-15-preview
+FILTER_NAME=defaultv2
+BLOCKING_THRESHOLD_LEVEL=middle
+```
+
+#### For Azure Content Safety
+```bash
+CONTENT_SAFETY_ENDPOINT=https://your-content-safety-resource.cognitiveservices.azure.com/
+CONTENT_SAFETY_KEY=your-content-safety-key-here
+# Higher levels focus only on the most severe harmful content, while lower levels also detect milder or borderline cases.
+# 1-2: low
+# 3-4: medium
+# 5-6: high
+CONTENT_SAFETY_THRESHOLD=4
+```
+
+
+
+## Korean Hate Speech Detection Evaluation Report
+
+## Evaluation Overview 
+
+- **Dataset**: K-MHaS (Korean Multi-label Hate Speech Dataset), 100 samples
+- **Evaluation Target**: Azure OpenAI Content Filter vs Azure Content Safety
+- **Metrics**: Precision, Recall, F1-Score, Accuracy
+- **Created**: 2025-08-14
+
+### Performance Comparison: Content Filter vs Content Safety
+
+| Method | Blocking/Severity | Precision | Recall | F1-Score | Accuracy | False Positive Rate | False Negative Rate |
+|--------|-----------|-----------|--------|----------|----------|--------------------|--------------------|
+| **Content Filter** | Low | 0.500 | 0.029 | 0.056 | 0.660 | 0.015 | 0.971 |
+| **Content Filter** | Medium | 0.548 | 0.500 | 0.523 | 0.690 | 0.212 | 0.500 |
+| **Content Filter** | High | 0.429 | 0.882 | 0.577 | 0.560 | 0.606 | 0.118 |
+| **Content Safety** | 1~2 | 0.408 | 0.912 | 0.564 | 0.520 | 0.682 | 0.088 |
+| **Content Safety** | 3~4 | 0.581 | 0.529 | 0.554 | 0.710 | 0.197 | 0.471 |
+| **Content Safety** | 5~6 | 0.500 | 0.029 | 0.056 | 0.660 | 0.015 | 0.971 |
+
+### Content Filter Evaluation Results
+
+#### Overall Performance Metrics
+
+| Blocking threshold | Precision | Recall | F1-Score | Accuracy | TP | TN | FP | FN | Total |
+|-----------|-----------|--------|----------|----------|----|----|----|----|-------|
+| **Low** | 0.500 | 0.029 | 0.056 | 0.660 | 1 | 65 | 1 | 33 | 100 |
+| **Medium** | 0.548 | 0.500 | 0.523 | 0.690 | 17 | 52 | 14 | 17 | 100 |
+| **High** | 0.429 | 0.882 | 0.577 | 0.560 | 30 | 26 | 40 | 4 | 100 |
+
+#### Detailed Category Analysis
+
+|         |                                   |low||medium||high||
+|---------------|-----------------------------------------|-------------|------|--------|------|--------------|------|
+|category_big   |category                                 |filtered<br>count        |filtered<br>mean  |filtered<br>count   |filtered<br>mean  |filtered<br>count         |filtered<br>mean  |
+|Hate Speech    |['Age', 'Religion']            |0            |0.000 |1       |1.000 |1             |1.000 |
+|Hate Speech    |['Age']            |1            |0.125 |4       |0.500 |6             |0.750 |
+|Hate Speech    |['Gender']            |0            |0.000 |0       |0.000 |2             |0.500 |
+|Hate Speech    |['Origin', 'Age']            |0            |0.000 |3       |1.000 |3             |1.000 |
+|Hate Speech    |['Origin', 'Religion']            |0            |0.000 |1       |0.500 |2             |1.000 |
+|Hate Speech    |['Origin']            |0            |0.000 |1       |0.200 |5             |1.000 |
+|Hate Speech    |['Physical']            |0            |0.000 |1       |1.000 |1             |1.000 |
+|Hate Speech    |['Politics', 'Age']            |0            |0.000 |1       |1.000 |1             |1.000 |
+|Hate Speech    |['Politics', 'Physical']            |0            |0.000 |0       |0.000 |1             |1.000 |
+|Hate Speech    |['Politics', 'Religion']            |0            |0.000 |1       |1.000 |1             |1.000 |
+|Hate Speech    |['Politics']            |0            |0.000 |2       |1.000 |2             |1.000 |
+|Hate Speech    |['Profanity']            |0            |0.000 |1       |0.500 |2             |1.000 |
+|Hate Speech    |['Race']            |0            |0.000 |1       |1.000 |1             |1.000 |
+|Hate Speech    |['Religion']            |0            |0.000 |0       |0.000 |2             |1.000 |
+|Not Hate Speech    |['Not Hate Speech']            |1            |0.015 |14       |0.212 |40             |0.606 |
+|**Filtering Total**|                                         |             |      |        |      |              |      |
+|**Hate Speech**    |-                                        |**1**          |**0.029** |**17**      |**0.500** |**30**            |**0.882** |
+|**Not Hate Speech**|-                                        |**1**          |**0.015** |**14**      |**0.212** |**40**             |**0.606** |
+
+### Content Safety Evaluation Results
+
+#### Overall Performance Metrics
+
+| Severity level | Precision | Recall | F1-Score | Accuracy | TP | TN | FP | FN | Total |
+|-----------|-----------|--------|----------|----------|----|----|----|----|-------|
+| **Low (1~2)** | 0.408 | 0.912 | 0.564 | 0.520 | 31 | 21 | 45 | 3 | 100 |
+| **Medium (3~4)** | 0.581 | 0.529 | 0.554 | 0.710 | 18 | 53 | 13 | 16 | 100 |
+| **High (5~6)** | 0.500 | 0.029 | 0.056 | 0.660 | 1 | 65 | 1 | 33 | 100 |
+
+#### Detailed Category Analysis
+
+|         |                                   |low<br>(1~2)||medium<br>(3~4)||high<br>(5~6)||
+|---------------|-----------------------------------------|-------------|------|--------|------|--------------|------|
+|category_big   |category                                 |filtered<br>count        |filtered<br>mean  |filtered<br>count   |filtered<br>mean  |filtered<br>count         |filtered<br>mean  |
+|Hate Speech    |['Age', 'Religion']            |1            |1.000 |1       |1.000 |0             |0.000 |
+|Hate Speech    |['Age']            |7            |0.875 |4       |0.500 |1             |0.125 |
+|Hate Speech    |['Gender']            |2            |0.500 |0       |0.000 |0             |0.000 |
+|Hate Speech    |['Origin', 'Age']            |3            |1.000 |2       |0.667 |0             |0.000 |
+|Hate Speech    |['Origin', 'Religion']            |2            |1.000 |2       |1.000 |0             |0.000 |
+|Hate Speech    |['Origin']            |5            |1.000 |3       |0.600 |0             |0.000 |
+|Hate Speech    |['Physical']            |1            |1.000 |1       |1.000 |0             |0.000 |
+|Hate Speech    |['Politics', 'Age']            |1            |1.000 |1       |1.000 |0             |0.000 |
+|Hate Speech    |['Politics', 'Physical']            |1            |1.000 |0       |0.000 |0             |0.000 |
+|Hate Speech    |['Politics', 'Religion']            |1            |1.000 |1       |1.000 |0             |0.000 |
+|Hate Speech    |['Politics']            |2            |1.000 |2       |1.000 |0             |0.000 |
+|Hate Speech    |['Profanity']            |2            |1.000 |1       |0.500 |0             |0.000 |
+|Hate Speech    |['Race']            |1            |1.000 |0       |0.000 |0             |0.000 |
+|Hate Speech    |['Religion']            |2            |1.000 |0       |0.000 |0             |0.000 |
+|Not Hate Speech    |['Not Hate Speech']            |45            |0.682 |13       |0.197 |1             |0.015 |
+|**Filtering Total**|                                         |             |      |        |      |              |      |
+|**Hate Speech**    |-                                        |**31**          |**0.912** |**18**      |**0.529** |**1**            |**0.029** |
+|**Not Hate Speech**|-                                        |**45**          |**0.682** |**13**      |**0.197** |**1**             |**0.015** |
+
+### 🏆 Best performance
+#### based on F1-Score:
+    1. Content Filter (high): F1=0.577 (P=0.429, R=0.882)
+    2. Content Safety (1~2): F1=0.564 (P=0.408, R=0.912)
+    3. Content Safety (3-4): F1=0.554 (P=0.581, R=0.529)
+
+### The Korean Multi-label Hate Speech Dataset, K-MHaS 
+The Korean Multi-label Hate Speech Dataset, K-MHaS, consists of 109,692 utterances from Korean online news comments, labelled with 8 fine-grained hate speech classes (labels: Politics, Origin, Physical, Age, Gender, Religion, Race, Profanity) or Not Hate Speech class. Each utterance provides from a single to four labels that can handles Korean language patterns effectively. For more details, please refer to our paper about K-MHaS, published at COLING 2022. 
+
+- [Paper](https://aclanthology.org/2022.coling-1.311/), [Hugging Face](https://huggingface.co/datasets/nayohan/K-MHaS)
+
 
 ## References
 
