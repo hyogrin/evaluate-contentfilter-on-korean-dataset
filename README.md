@@ -260,6 +260,14 @@ CONTENT_SAFETY_THRESHOLD=4
 |**Hate Speech**    |-                                        |**31**          |**0.912** |**18**      |**0.529** |**1**            |**0.029** |
 |**Not Hate Speech**|-                                        |**45**          |**0.682** |**13**      |**0.197** |**1**             |**0.015** |
 
+### Evaluation Report Comparison
+![evaluation report comparison](images/evaluation_comparison.png)
+
+### Accessible data files
+- [evaluated result data](results/[content_filter]-DefaultV2-medium-2025-08-14-16-33-59.csv)
+- [evaluated confusion matrix](results/[content_filter]-DefaultV2-medium-2025-08-14-16-33-59_c_matrix.png)
+- [evaluation report](results/[content_filter]-DefaultV2-medium-2025-08-14-16-33-59_en_report.html)
+
 ### 🏆 Best performance
 #### based on F1-Score:
     1. Content Filter (high): F1=0.577 (P=0.429, R=0.882)
