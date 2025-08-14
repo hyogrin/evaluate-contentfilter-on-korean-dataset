@@ -268,11 +268,18 @@ CONTENT_SAFETY_THRESHOLD=4
 - [evaluated confusion matrix](results/[content_filter]-DefaultV2-medium-2025-08-14-16-33-59_c_matrix.png)
 - [evaluation report](results/[content_filter]-DefaultV2-medium-2025-08-14-16-33-59_en_report.html)
 
-### 🏆 Best performance
-#### based on F1-Score:
-    1. Content Filter (high): F1=0.577 (P=0.429, R=0.882)
-    2. Content Safety (1~2): F1=0.564 (P=0.408, R=0.912)
-    3. Content Safety (3-4): F1=0.554 (P=0.581, R=0.529)
+### 🏆 Performance Review
+    - Most Practical Default Setting
+    We recommend starting with ACS(Azure Content Safety) Medium (3–4). It is similar to or slightly better than CF(Content Filter) Medium, with accuracy of 0.71 vs. 0.69 and lower false positives (FPR 0.197 vs. 0.212), providing a good balance between catching harmful content and avoiding over-blocking.
+
+    - Maximum Blocking 
+    CF(Content Filter) High or ACS(Azure Content Safety) Low (1–2) achieve higher recall but have very high false positive rates (CF High FPR: 0.606, ACS 1–2 FPR: 0.682). 
+
+    - Minimum Blocking 
+    CF(Content Filter) Low or ACS(Azure Content Safety) High (5–6) achieve the lowest block rate — very low FPR but extremely high FNR (i.e., high precision, very low recall). In this sample evaluation showed FPR ≈ 0.015 and FNR ≈ 0.97, meaning most harmful content slips through while safe messages are almost never blocked.
+
+    - Caution
+    Korean is not an officially supported language, so model performance may vary. This report is based on a small sample size (100), meaning decisions should be made under a “multi-layer defense + continuous tuning” approach rather than relying solely on a single static configuration.
 
 ---
 
