@@ -19,6 +19,7 @@ The content filtering models for the hate, sexual, violence, and self-harm categ
 - **Multiple model configurations**: Support for different deployment configurations
 - **Environment-based configuration**: Support for multiple `.env` files for different deployments
 
+---
 
 ## Blocking Threshold in Content Filter VS Severity Level in Content Safety
 
@@ -28,14 +29,14 @@ The content filtering models for the hate, sexual, violence, and self-harm categ
 > - **Content Filter (Blocking Threshold)**: Higher → blocks **more** content.  
 > - **Content Safety (Severity Level)**: Lower → detects **more** harmful content.
 
----
+
 
 ### 📌 Easy Explanation
 - **Content Filter**: **Low → blocks less**, **High → blocks more**  
 - **Content Safety**: **Low (1–2) → highly sensitive**, **High (5–6) → only catches the most severe**  
 - In other words, **"Low"** in Content Filter ≠ **"Low"** in Content Safety. They mean the opposite.
 
----
+
 
 ### 🔍 Comparison Table
 
@@ -44,8 +45,6 @@ The content filtering models for the hate, sexual, violence, and self-harm categ
 | Low                                    | High (5–6)                                  | Content Filter: Blocks mild cases only.<br>Content Safety: Catches only the most severe harmful content. |
 | Medium                                 | Medium (3–4)                                  | Content Filter: Balanced blocking.<br>Content Safety: Catches moderate harmful content. |
 | High                                   | Low (1–2)                                  | Content Filter: Blocks almost everything suspicious.<br>Content Safety: Detects even mild or borderline harmful content. |
-
----
 
 ### 🎯 Visual Level Diagram
 Content Filter (Blocking Threshold)
@@ -62,11 +61,12 @@ More Sensitive Less Sensitive
 - **▢▢** = Blocking intensity in Content Filter  
 - **■■** = Detection sensitivity in Content Safety  
 
----
 
 ### 💡 Quick Memory Tip
 - **Content Filter**: *Low → blocks less*  
 - **Content Safety**: *Low → detects more*
+
+---
 
 ## Usage
 
@@ -170,7 +170,7 @@ CONTENT_SAFETY_KEY=your-content-safety-key-here
 CONTENT_SAFETY_THRESHOLD=4
 ```
 
-
+---
 
 ## Korean Hate Speech Detection Evaluation Report
 
@@ -265,6 +265,8 @@ CONTENT_SAFETY_THRESHOLD=4
     1. Content Filter (high): F1=0.577 (P=0.429, R=0.882)
     2. Content Safety (1~2): F1=0.564 (P=0.408, R=0.912)
     3. Content Safety (3-4): F1=0.554 (P=0.581, R=0.529)
+
+---
 
 ### The Korean Multi-label Hate Speech Dataset, K-MHaS 
 The Korean Multi-label Hate Speech Dataset, K-MHaS, consists of 109,692 utterances from Korean online news comments, labelled with 8 fine-grained hate speech classes (labels: Politics, Origin, Physical, Age, Gender, Religion, Race, Profanity) or Not Hate Speech class. Each utterance provides from a single to four labels that can handles Korean language patterns effectively. For more details, please refer to our paper about K-MHaS, published at COLING 2022. 
