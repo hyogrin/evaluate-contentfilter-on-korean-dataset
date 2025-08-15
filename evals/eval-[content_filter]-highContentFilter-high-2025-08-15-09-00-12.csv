@@ -1,0 +1,40 @@
+category_big,category,total_count,filtered_count,filtered_mean
+Hate Speech,"['Age', 'Gender', 'Religion']",2,2,1.0
+Hate Speech,"['Age', 'Gender']",9,9,1.0
+Hate Speech,"['Age', 'Profanity']",2,2,1.0
+Hate Speech,"['Age', 'Religion', 'Race']",1,1,1.0
+Hate Speech,"['Age', 'Religion']",16,15,0.9375
+Hate Speech,['Age'],169,138,0.8165680473372781
+Hate Speech,"['Gender', 'Religion']",22,20,0.9090909090909091
+Hate Speech,['Gender'],72,56,0.7777777777777778
+Hate Speech,"['Origin', 'Age', 'Religion']",4,3,0.75
+Hate Speech,"['Origin', 'Age']",31,30,0.967741935483871
+Hate Speech,"['Origin', 'Gender']",1,1,1.0
+Hate Speech,"['Origin', 'Physical', 'Age']",5,5,1.0
+Hate Speech,"['Origin', 'Physical']",3,3,1.0
+Hate Speech,"['Origin', 'Religion']",18,15,0.8333333333333334
+Hate Speech,['Origin'],98,84,0.8571428571428571
+Hate Speech,"['Physical', 'Age', 'Gender']",1,1,1.0
+Hate Speech,"['Physical', 'Age', 'Race']",1,1,1.0
+Hate Speech,"['Physical', 'Age']",18,17,0.9444444444444444
+Hate Speech,"['Physical', 'Gender']",15,14,0.9333333333333333
+Hate Speech,"['Physical', 'Religion']",4,4,1.0
+Hate Speech,['Physical'],113,95,0.8407079646017699
+Hate Speech,"['Politics', 'Age', 'Gender']",2,2,1.0
+Hate Speech,"['Politics', 'Age', 'Religion']",3,3,1.0
+Hate Speech,"['Politics', 'Age']",20,18,0.9
+Hate Speech,"['Politics', 'Gender']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age']",2,1,0.5
+Hate Speech,"['Politics', 'Origin', 'Physical']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Religion']",2,2,1.0
+Hate Speech,"['Politics', 'Origin']",1,1,1.0
+Hate Speech,"['Politics', 'Physical', 'Age']",5,4,0.8
+Hate Speech,"['Politics', 'Physical']",16,16,1.0
+Hate Speech,"['Politics', 'Religion']",15,15,1.0
+Hate Speech,['Politics'],102,98,0.9607843137254902
+Hate Speech,['Profanity'],30,26,0.8666666666666667
+Hate Speech,['Race'],1,1,1.0
+Hate Speech,"['Religion', 'Race']",1,1,1.0
+Hate Speech,['Religion'],62,57,0.9193548387096774
+Not Hate Speech,['Not Hate Speech'],1130,580,0.5132743362831859

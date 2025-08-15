@@ -1,0 +1,40 @@
+category_big,category,total_count,filtered_count,filtered_mean
+Hate Speech,"['Age', 'Gender', 'Religion']",2,2,1.0
+Hate Speech,"['Age', 'Gender']",9,7,0.7777777777777778
+Hate Speech,"['Age', 'Profanity']",2,0,0.0
+Hate Speech,"['Age', 'Religion', 'Race']",1,1,1.0
+Hate Speech,"['Age', 'Religion']",16,9,0.5625
+Hate Speech,['Age'],169,54,0.31952662721893493
+Hate Speech,"['Gender', 'Religion']",22,8,0.36363636363636365
+Hate Speech,['Gender'],72,34,0.4722222222222222
+Hate Speech,"['Origin', 'Age', 'Religion']",4,3,0.75
+Hate Speech,"['Origin', 'Age']",31,23,0.7419354838709677
+Hate Speech,"['Origin', 'Gender']",1,0,0.0
+Hate Speech,"['Origin', 'Physical', 'Age']",5,3,0.6
+Hate Speech,"['Origin', 'Physical']",3,2,0.6666666666666666
+Hate Speech,"['Origin', 'Religion']",18,9,0.5
+Hate Speech,['Origin'],98,50,0.5102040816326531
+Hate Speech,"['Physical', 'Age', 'Gender']",1,1,1.0
+Hate Speech,"['Physical', 'Age', 'Race']",1,1,1.0
+Hate Speech,"['Physical', 'Age']",18,12,0.6666666666666666
+Hate Speech,"['Physical', 'Gender']",15,8,0.5333333333333333
+Hate Speech,"['Physical', 'Religion']",4,3,0.75
+Hate Speech,['Physical'],113,35,0.30973451327433627
+Hate Speech,"['Politics', 'Age', 'Gender']",2,2,1.0
+Hate Speech,"['Politics', 'Age', 'Religion']",3,1,0.3333333333333333
+Hate Speech,"['Politics', 'Age']",20,13,0.65
+Hate Speech,"['Politics', 'Gender']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age']",2,0,0.0
+Hate Speech,"['Politics', 'Origin', 'Physical']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Religion']",2,1,0.5
+Hate Speech,"['Politics', 'Origin']",1,1,1.0
+Hate Speech,"['Politics', 'Physical', 'Age']",5,4,0.8
+Hate Speech,"['Politics', 'Physical']",16,13,0.8125
+Hate Speech,"['Politics', 'Religion']",15,10,0.6666666666666666
+Hate Speech,['Politics'],102,70,0.6862745098039216
+Hate Speech,['Profanity'],30,14,0.4666666666666667
+Hate Speech,['Race'],1,1,1.0
+Hate Speech,"['Religion', 'Race']",1,1,1.0
+Hate Speech,['Religion'],62,28,0.45161290322580644
+Not Hate Speech,['Not Hate Speech'],1130,202,0.17876106194690267

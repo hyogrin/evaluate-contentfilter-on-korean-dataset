@@ -1,0 +1,40 @@
+category_big,category,total_count,filtered_count,filtered_mean
+Hate Speech,"['Age', 'Gender', 'Religion']",2,2,1.0
+Hate Speech,"['Age', 'Gender']",9,9,1.0
+Hate Speech,"['Age', 'Profanity']",2,2,1.0
+Hate Speech,"['Age', 'Religion', 'Race']",1,1,1.0
+Hate Speech,"['Age', 'Religion']",16,16,1.0
+Hate Speech,['Age'],169,150,0.8875739644970414
+Hate Speech,"['Gender', 'Religion']",22,20,0.9090909090909091
+Hate Speech,['Gender'],72,60,0.8333333333333334
+Hate Speech,"['Origin', 'Age', 'Religion']",4,4,1.0
+Hate Speech,"['Origin', 'Age']",31,30,0.967741935483871
+Hate Speech,"['Origin', 'Gender']",1,0,0.0
+Hate Speech,"['Origin', 'Physical', 'Age']",5,5,1.0
+Hate Speech,"['Origin', 'Physical']",3,3,1.0
+Hate Speech,"['Origin', 'Religion']",18,17,0.9444444444444444
+Hate Speech,['Origin'],98,81,0.826530612244898
+Hate Speech,"['Physical', 'Age', 'Gender']",1,1,1.0
+Hate Speech,"['Physical', 'Age', 'Race']",1,1,1.0
+Hate Speech,"['Physical', 'Age']",18,18,1.0
+Hate Speech,"['Physical', 'Gender']",15,14,0.9333333333333333
+Hate Speech,"['Physical', 'Religion']",4,4,1.0
+Hate Speech,['Physical'],113,98,0.8672566371681416
+Hate Speech,"['Politics', 'Age', 'Gender']",2,2,1.0
+Hate Speech,"['Politics', 'Age', 'Religion']",3,3,1.0
+Hate Speech,"['Politics', 'Age']",20,19,0.95
+Hate Speech,"['Politics', 'Gender']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age', 'Religion']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Age']",2,1,0.5
+Hate Speech,"['Politics', 'Origin', 'Physical']",1,1,1.0
+Hate Speech,"['Politics', 'Origin', 'Religion']",2,2,1.0
+Hate Speech,"['Politics', 'Origin']",1,1,1.0
+Hate Speech,"['Politics', 'Physical', 'Age']",5,5,1.0
+Hate Speech,"['Politics', 'Physical']",16,15,0.9375
+Hate Speech,"['Politics', 'Religion']",15,15,1.0
+Hate Speech,['Politics'],102,97,0.9509803921568627
+Hate Speech,['Profanity'],30,28,0.9333333333333333
+Hate Speech,['Race'],1,1,1.0
+Hate Speech,"['Religion', 'Race']",1,1,1.0
+Hate Speech,['Religion'],62,58,0.9354838709677419
+Not Hate Speech,['Not Hate Speech'],1130,656,0.5805309734513274

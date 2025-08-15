@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ### Parallel execution version of run_all_gpts.sh with resume capability
-env_files=(.env_gpt-4-nano-default, .env_gpt-4-nano-low, .env_gpt-4-nano-high) 
-is_debug=True
+env_files=(.env_gpt_*) 
+is_debug=False
 batch_size=10
 max_tokens=256
 temperature=0.01

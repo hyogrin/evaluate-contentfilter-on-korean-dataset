@@ -845,7 +845,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Korean Hate Speech Content Filter/Safety Evaluation with Multiprocessing")
     parser.add_argument("--num_samples", type=int, default=2000)
     parser.add_argument("--is_random", type=str2bool, default=False)
-    parser.add_argument("--is_debug", type=str2bool, default=True)
+    parser.add_argument("--is_debug", type=str2bool, default=False)
     parser.add_argument("--num_debug_samples", type=int, default=30)
     parser.add_argument("--model_provider", type=str, default="azureopenai")
     parser.add_argument("--split", type=str, default="valid")
@@ -862,7 +862,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_workers", type=int, default=3, help="Maximum number of worker processes")
     
     # locale 인수 추가
-    parser.add_argument("--locale", type=str, default="ko-KR", 
+    parser.add_argument("--locale", type=str, default="en-US", 
                        choices=["ko-KR", "en-US"],
                        help="Output language: ko-KR (Korean) or en-US (English)")
     
