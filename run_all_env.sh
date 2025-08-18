@@ -3,7 +3,7 @@
 ### Parallel execution version of run_all_gpts.sh with resume capability
 env_files=(.env_gpt_*) 
 is_debug=False
-batch_size=10
+chunk_size=10
 max_tokens=256
 temperature=0.01
 max_parallel_jobs=2
@@ -29,7 +29,7 @@ run_model() {
     DOTENV_PATH="$env_file" python main.py \
         --is_debug "$is_debug" \
         --model_provider "$model_provider" \
-        --batch_size "$batch_size" \
+        --chunk_size "$chunk_size" \
         --max_tokens "$max_tokens" \
         --temperature "$temperature" \
         --evaluation_target "$evaluation_target" \

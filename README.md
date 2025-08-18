@@ -12,7 +12,7 @@ The content filtering models for the hate, sexual, violence, and self-harm categ
 ## Features
 
 - **Multi-processing support**: Parallel execution for faster processing
-- **Batch processing**: Configurable batch sizes for optimal performance
+- **Chunk processing**: Configurable chunk sizes for optimal performance
 - **Multiple evaluation targets**: 
   - `content_filter`: Azure OpenAI Content Filter evaluation
   - `content_safety`: Azure Content Safety service evaluation
@@ -98,7 +98,7 @@ Options:
   --max_retries INT         Maximum retry attempts (default: 3)
   --max_tokens INT          Maximum tokens (default: 256)
   --temperature FLOAT       Temperature (default: 0)
-  --batch_size INT          Batch size (default: 10)
+  --chunk_size INT          Chunk size (default: 10)
   --evaluation_target STR   Evaluation target: content_filter or content_safety
   --use_multiprocessing BOOL Enable multiprocessing (default: True)
   --max_workers INT         Maximum worker processes (default: 3)
@@ -118,7 +118,7 @@ Options:
     parser.add_argument("--max_retries", type=int, default=3)
     parser.add_argument("--max_tokens", type=int, default=256)
     parser.add_argument("--temperature", type=float, default=0)
-    parser.add_argument("--batch_size", type=int, default=5)
+    parser.add_argument("--chunk_size", type=int, default=5)
     parser.add_argument("--evaluation_target", type=str, default="content_filter", 
                        choices=["content_filter", "content_safety"],
                        help="Target evaluation: content_filter (Azure OpenAI Content Filter) or content_safety (Azure Content Safety)")

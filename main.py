@@ -71,7 +71,7 @@ def benchmark_multiprocess(args):
     model_config = {
         'evaluation_target': args.evaluation_target,
         'model_provider': args.model_provider,
-        'batch_size': args.batch_size,
+        'chunk_size': args.chunk_size,
         'max_tokens': args.max_tokens,
         'temperature': args.temperature,
         'max_retries': args.max_retries,
@@ -183,33 +183,33 @@ def benchmark_multiprocess(args):
     
     start_time = time.time()
     
-    # 배치 크기에 따라 데이터 분할
-    batch_size = model_config['batch_size']
-    batches = [all_data[i:i + batch_size] for i in range(0, len(all_data), batch_size)]
+    # 청크 크기에 따라 데이터 분할
+    chunk_size = model_config['chunk_size']
+    chunks = [all_data[i:i + chunk_size] for i in range(0, len(all_data), chunk_size)]
     
-    logger.info(f"Processing {len(all_data)} items in {len(batches)} batches with {args.max_workers} workers")
+    logger.info(f"Processing {len(all_data)} items in {len(chunks)} chunks with {args.max_workers} workers")
     
     # 멀티프로세싱 실행
     responses = []
     with ProcessPoolExecutor(max_workers=args.max_workers) as executor:
-        batch_tasks = [(batch, model_config, csv_path) for batch in batches]
+        chunk_tasks = [(chunk, model_config, csv_path) for chunk in chunks]
         
-        with tqdm(total=len(batches), desc="Processing Batches") as pbar:
-            futures = [executor.submit(process_batch_streaming, task) for task in batch_tasks]
+        with tqdm(total=len(chunks), desc="Processing Chunks") as pbar:
+            futures = [executor.submit(process_chunk_streaming, task) for task in chunk_tasks]
             
             for future in futures:
                 try:
-                    batch_responses = future.result()
-                    responses.extend(batch_responses)
+                    chunk_responses = future.result()
+                    responses.extend(chunk_responses)
                     pbar.update(1)
                 except Exception as e:
-                    logger.error(f"Error processing batch: {e}")
+                    logger.error(f"Error processing chunk: {e}")
                     pbar.update(1)
 
     end_time = time.time()
     total_time = format_timespan(end_time - start_time)
     
-    logger.info(f"====== [DONE] All batches processed in {total_time} =====")
+    logger.info(f"====== [DONE] All chunks processed in {total_time} =====")
     
     # 결과 저장
     if responses:
@@ -230,14 +230,14 @@ def benchmark_multiprocess(args):
     logger.info(f"====== [END] Evaluation completed =====")
 
 
-def process_batch_streaming(batch_info):
-    """스트리밍 방식으로 배치 처리"""
+def process_chunk_streaming(chunk_info):
+    """스트리밍 방식으로 청크 처리"""
     try:
-        batch_data, model_config, csv_path = batch_info
+        chunk_data, model_config, csv_path = chunk_info
         
         responses = []
         
-        for data in batch_data:
+        for data in chunk_data:
             retries = 0
             
             while retries <= model_config['max_retries']:
@@ -308,7 +308,7 @@ def process_batch_streaming(batch_info):
         return responses
         
     except Exception as e:
-        logger.error(f"Error in process_batch_streaming: {e}")
+        logger.error(f"Error in process_chunk_streaming: {e}")
         return []
 
 
@@ -734,7 +734,7 @@ def benchmark_sequential(args):
                     retries += 1
 
                     if retries > args.max_retries:
-                        logger.error(f"Max retries reached this batch. ")
+                        logger.error(f"Max retries reached this chunk. ")
                         break
                 except openai.BadRequestError as e:
                     logger.error(f"BadRequestError, {getattr(e, 'body', {}).get('innererror', {}).get('code', 'unknown')}, {getattr(e, 'body', {}).get('message', str(e))}. ")
@@ -852,7 +852,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_retries", type=int, default=3)
     parser.add_argument("--max_tokens", type=int, default=256)
     parser.add_argument("--temperature", type=float, default=0)
-    parser.add_argument("--batch_size", type=int, default=5)
+    parser.add_argument("--chunk_size", type=int, default=5)
     parser.add_argument("--evaluation_target", type=str, default="content_filter", 
                        choices=["content_filter", "content_safety"],
                        help="Target evaluation: content_filter (Azure OpenAI Content Filter) or content_safety (Azure Content Safety)")
